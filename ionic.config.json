@@ -1,0 +1,7 @@
+{
+  "name": "inventario_app-moviles",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
