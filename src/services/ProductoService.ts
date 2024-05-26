@@ -6,6 +6,10 @@ class ProductoService {
     async getAllProductos() {
         return await getAxios('producto/listado')
     }
+
+    async getAllCategories() {
+        return await getAxios('producto/categories')
+    }
 }
 
 

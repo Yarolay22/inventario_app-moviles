@@ -42,12 +42,18 @@ export const InventarioProvider: React.FC<any> = ({ children }: {children: any})
         return data;
     }
 
+    const onLoadCategories = async () => {
+        const {data} = await new ProductoService().getAllCategories()
+        return data;
+    }
+
     return (
         <InventarioContext.Provider value={{
             stateAuth,
             estadisticas,
             onLogin,
-            onLoadProductos
+            onLoadProductos,
+            onLoadCategories
         }} >
             {children}
         </InventarioContext.Provider>

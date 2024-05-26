@@ -1,17 +1,23 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonImg, IonItem, IonLabel, IonList, IonTitle } from "@ionic/react"
+import {  IonContent, IonFab, IonFabButton, IonIcon, IonImg, IonList, IonTitle} from "@ionic/react"
 import { useContext, useEffect, useState } from 'react';
 import { InventarioContext } from "../context/InventarioContext"
+import { add } from 'ionicons/icons'
+import { CardProducto } from "../components/CardProducto";
+import { ModalContext } from "../context/ModalContext";
+import { ModalProducto } from "../components/ModalProducto";
 
 export const Productos: React.FC = () => {
 
+    
     const { onLoadProductos } = useContext(InventarioContext)
+    const { onOpenModal } = useContext(ModalContext)
     const [productos, setProductos] = useState([])
 
     useEffect(() => {
         onLoadProductos()
             .then((productos: any) => setProductos(productos))
             .catch(() => setProductos([]))
-    }, [onLoadProductos])
+    }, [])
 
     return (
         <>
@@ -24,28 +30,19 @@ export const Productos: React.FC = () => {
             <IonContent>
 
                 <IonList>
-                    {productos.map((producto: any) => (
-                        <IonCard>
-                            <IonCardHeader>
-                                <IonCardTitle>{producto.name}</IonCardTitle>
-                                <IonCardSubtitle>Categoria: <span style={{ fontWeight: 'bold' }}>{producto.categoria}</span></IonCardSubtitle>
-                                <p>Cantidad: <span>{producto.cantidad}</span> Precio: <span>{producto.precio}</span></p>
-                            </IonCardHeader>
-
-                            <IonCardContent>
-                                {producto.descripcion}
-                                <div style={{marginTop: '1rem'}}>
-                                    <IonButton fill="outline">Editar</IonButton>
-                                    <IonButton fill="clear">Eliminar</IonButton>
-                                </div>
-                            </IonCardContent>
-
-
-                        </IonCard>
-                    ))}
+                    {productos.map((producto: any) => <CardProducto key={producto.id} producto={producto} />)}
                 </IonList>
 
+
+                <ModalProducto />
+
             </IonContent>
+
+            <IonFab slot="fixed" vertical="bottom" horizontal="end" onClick={onOpenModal}>
+                <IonFabButton>
+                    <IonIcon icon={add}></IonIcon>
+                </IonFabButton>
+            </IonFab>
         </>
     )
 }

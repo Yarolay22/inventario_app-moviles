@@ -5,6 +5,7 @@ import { Dashboard, HistorialVentas, Login, Productos, Ventas } from "../pages"
 import { useContext } from "react"
 import { InventarioContext } from "../context/InventarioContext"
 import { InventarioLayout } from "../layout/InventarioLayout"
+import { ModalProvider } from "../context/ModalContext"
 
 
 
@@ -19,9 +20,12 @@ export const InventarioRoute: React.FC = () => {
                     <InventarioLayout>
                         <Route path="*" render={() => <Redirect to="/dashboard" />} />
                         <Route path="/dashboard" component={Dashboard} />
-                        <Route path="/venta" component={Ventas} />
-                        <Route path="/productos" component={Productos} />
-                        <Route path="/historial-venta" component={HistorialVentas} />
+                        <ModalProvider>
+                            <Route path="/venta" component={Ventas} />
+                            <Route path="/productos" component={Productos} />
+                            <Route path="/historial-venta" component={HistorialVentas} />
+                        </ModalProvider>
+
                         <Redirect exact from="/" to="/dashboard" />
                     </InventarioLayout>
                 ) : (
