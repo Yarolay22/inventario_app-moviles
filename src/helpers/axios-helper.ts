@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const url = 'http://192.168.1.3:3070'
+const url = 'https://pmr2mqz3-3070.use2.devtunnels.ms'
 
 const configAxios = {
     headers: {

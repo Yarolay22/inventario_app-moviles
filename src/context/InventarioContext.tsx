@@ -3,6 +3,7 @@ import AuthService from "../services/AuthService";
 import {  useIonRouter } from "@ionic/react";
 import DashboardService from "../services/DasboardService";
 import { estadisticaVentas } from "../constant";
+import ProductoService from "../services/ProductoService";
 
 
 
@@ -20,7 +21,6 @@ export const InventarioProvider: React.FC<any> = ({ children }: {children: any})
         if(stateAuth) {
             new DashboardService().getEstadisticas().then(({data}) => {
                 const [efectivo, transferencia, credito] = estadisticaVentas;
-                console.log(data.payload)
                 setEstadisticas([
                     { ...efectivo, cantidad: data.payload.efectivo },
                     { ...transferencia, cantidad: data.payload.transferencia },
@@ -37,11 +37,17 @@ export const InventarioProvider: React.FC<any> = ({ children }: {children: any})
         router.push('/dashboard', 'root', 'replace');
     }
 
+    const onLoadProductos = async () => {
+        const {data} = await new ProductoService().getAllProductos()
+        return data;
+    }
+
     return (
         <InventarioContext.Provider value={{
             stateAuth,
             estadisticas,
-            onLogin
+            onLogin,
+            onLoadProductos
         }} >
             {children}
         </InventarioContext.Provider>
