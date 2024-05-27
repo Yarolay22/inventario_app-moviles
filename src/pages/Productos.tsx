@@ -9,7 +9,7 @@ import { ModalProducto } from "../components/ModalProducto";
 export const Productos: React.FC = () => {
 
     
-    const { onLoadProductos } = useContext(InventarioContext)
+    const { onLoadProductos, onResetProductActivo } = useContext(InventarioContext)
     const { onOpenModal } = useContext(ModalContext)
     const [productos, setProductos] = useState([])
 
@@ -19,6 +19,12 @@ export const Productos: React.FC = () => {
             .catch(() => setProductos([]))
     }, [])
 
+
+    const onCreateProduct = () => {
+        onOpenModal();
+        onResetProductActivo();
+    }
+
     return (
         <>
             <div style={{ display: 'flex', gap: '.5rem' }}>
@@ -27,18 +33,17 @@ export const Productos: React.FC = () => {
             </div>
             <br />
             <h3>Listado de Productos</h3>
-            <IonContent>
+            <IonContent style={{height: '75vh'}}>
 
-                <IonList>
+                <IonList >
                     {productos.map((producto: any) => <CardProducto key={producto.id} producto={producto} />)}
                 </IonList>
-
 
                 <ModalProducto />
 
             </IonContent>
 
-            <IonFab slot="fixed" vertical="bottom" horizontal="end" onClick={onOpenModal}>
+            <IonFab slot="fixed" vertical="bottom" horizontal="end" onClick={onCreateProduct}>
                 <IonFabButton>
                     <IonIcon icon={add}></IonIcon>
                 </IonFabButton>

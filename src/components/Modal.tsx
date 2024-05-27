@@ -4,15 +4,15 @@ import { ModalContext } from "../context/ModalContext";
 
 
 
-export const Modal: React.FC<any> = ( {children}:  {children: any}) => {
+export const Modal: React.FC<any> = ( {title, children}:  {title: string, children: any}) => {
     const {isOpen, onCloseModal} = useContext(ModalContext)
     return (
         <IonModal isOpen={isOpen}>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Modal</IonTitle>
+                    <IonTitle>{title}</IonTitle>
                     <IonButtons slot="end">
-                        <IonButton onClick={onCloseModal}>Close</IonButton>
+                        <IonButton onClick={onCloseModal}>Cerrar</IonButton>
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const url = 'https://pmr2mqz3-3070.use2.devtunnels.ms'
+const url = 'http://localhost:3070'
 
 const configAxios = {
     headers: {

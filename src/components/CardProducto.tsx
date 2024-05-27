@@ -1,7 +1,25 @@
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from "@ionic/react"
+import { useContext } from "react"
+import { InventarioContext } from "../context/InventarioContext"
+import { ModalContext } from "../context/ModalContext"
 
 
 export const CardProducto: React.FC<any> = ({ producto }: { producto: any }) => {
+
+
+    const { onOpenModal } = useContext(ModalContext)
+    const {onDeleteProducto, onDetailProducto} = useContext(InventarioContext)
+
+
+    const onEditarProduct = () => {
+        onDetailProducto(producto.id)
+        onOpenModal()
+    }
+
+    const onDeleteProduct = () => {
+        onDeleteProducto(producto.id)
+    }
+
     return (
         <IonCard>
             <IonCardHeader>
@@ -13,8 +31,8 @@ export const CardProducto: React.FC<any> = ({ producto }: { producto: any }) => 
             <IonCardContent>
                 {producto.descripcion}
                 <div style={{ marginTop: '1rem' }}>
-                    <IonButton fill="outline">Editar</IonButton>
-                    <IonButton fill="clear">Eliminar</IonButton>
+                    <IonButton fill="outline" onClick={onEditarProduct}>Editar</IonButton>
+                    <IonButton fill="clear" onClick={onDeleteProduct}>Eliminar</IonButton>
                 </div>
             </IonCardContent>
 
