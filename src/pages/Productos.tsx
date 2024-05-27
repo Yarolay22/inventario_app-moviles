@@ -9,15 +9,13 @@ import { ModalProducto } from "../components/ModalProducto";
 export const Productos: React.FC = () => {
 
     
-    const { onLoadProductos, onResetProductActivo } = useContext(InventarioContext)
+    const {productos, onLoadProductos, onResetProductActivo } = useContext(InventarioContext)
     const { onOpenModal } = useContext(ModalContext)
-    const [productos, setProductos] = useState([])
+    
 
     useEffect(() => {
-        onLoadProductos()
-            .then((productos: any) => setProductos(productos))
-            .catch(() => setProductos([]))
-    }, [])
+        onLoadProductos();
+    }, [onLoadProductos])
 
 
     const onCreateProduct = () => {

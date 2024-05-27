@@ -1,4 +1,4 @@
-import { getAxios, postAxios } from "../helpers/axios-helper";
+import { deleteAxios, getAxios, postAxios, putAxios } from "../helpers/axios-helper";
 
 class ProductoService {
 
@@ -17,6 +17,19 @@ class ProductoService {
 
     async getProductoById(id: number) {
         return await getAxios(`producto/detail-product/${id}`)
+    }
+
+    async getAllHistorialVentas() {
+        return await getAxios('venta/listado')
+    }
+
+    async deleteProduct(id: number) {
+        return await deleteAxios(`producto/delete-product/${id}`)
+    }
+
+
+    async updateProduct(id: number, producto: any) {
+        return await putAxios(`producto/update-product/${id}`, producto)
     }
 }
 

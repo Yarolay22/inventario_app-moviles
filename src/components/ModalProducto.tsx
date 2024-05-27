@@ -10,9 +10,9 @@ import { ModalContext } from "../context/ModalContext"
 export const ModalProducto: React.FC<any> = () => {
 
     const { onCloseModal } = useContext(ModalContext);
-    const { onLoadCategories, onCreateProducto, productoActivo} = useContext(InventarioContext)
+    const { onLoadCategories, onCreateProducto, productoActivo, onUpdateProducto} = useContext(InventarioContext)
     const [categorias, setCategorias] = useState([])
-    const [productoForm, setProductoForm] = useState({ cantidad: 1, categoriaId: 0, descripcion: "", name: "", precio: 0 })
+    const [productoForm, setProductoForm] = useState({ id:0, cantidad: 1, categoriaId: 0, descripcion: "", name: "", precio: 0 })
 
 
     useEffect(() => {
@@ -32,8 +32,12 @@ export const ModalProducto: React.FC<any> = () => {
 
     const onSubmitForm = (evt: any) => {
         evt.preventDefault();
-        onCreateProducto(productoForm)
-        setProductoForm({ cantidad: 1, categoriaId: 0, descripcion: "", name: "", precio: 0 })
+        if(productoForm?.id !== 0) {
+            onUpdateProducto(productoForm)
+        } else {
+            onCreateProducto(productoForm)
+        }
+        setProductoForm({ id: 0,cantidad: 1, categoriaId: 0, descripcion: "", name: "", precio: 0 })
         onCloseModal()
     }
 

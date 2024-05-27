@@ -19,3 +19,13 @@ export const postAxios = async (endPoint: string, data: any) => {
     const response = await axios.post(`${url}/${endPoint}`, data,  configAxios)
     return response.data;
 }
+
+export const putAxios = async (endPoint: string, data: any) => {
+    const response = await axios.put(`${url}/${endPoint}`, data,  configAxios)
+    return response.data;
+}
+
+export const deleteAxios = async (endPoint: string) => {
+    const response = await axios.delete(`${url}/${endPoint}`, configAxios)
+    return response.data;
+}
